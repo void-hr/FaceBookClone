@@ -1,5 +1,7 @@
 const express = require("express");
 const cors = require("cors");
+const dotenv = require("dotenv").config();
+const mongoose = require("mongoose");
 const {readdirSync} = require('fs'); //fs: file system
 const app = express();
 
@@ -45,13 +47,17 @@ app.get('/', (req, res) => {
     res.send('welcome from 🌎 with love');
 });
 
-app.get('/books', (req, res) => {
-    res.send('welcome from 📚');
-});
 
 
+// DATABASE
+mongoose
+.connect(process.env.DATABASE_URL, {
+    useNewUrlParser : true,
+})
+.then(() => console.log("database connected sucessfully..."))
+.catch((err) => console.log("error connecting to mongodb", err));
 
-
-app.listen(8000, ()=>{
-    console.log('server is listenining boi 👦👦👦👦👦');
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, ()=>{
+    console.log(`server is listenining on:${PORT} bale! bale! 👦👦👦👦👦`);
 })

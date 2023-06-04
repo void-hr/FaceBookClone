@@ -4,6 +4,9 @@ const dotenv = require("dotenv").config();
 const mongoose = require("mongoose");
 const {readdirSync} = require('fs'); //fs: file system
 const app = express();
+// This method is used to parse the incoming requests with JSON payloads. 
+// Builtin middleware function json() in express
+app.use(express.json());
 
 // STATIC WAY for routes
 /* const userRoutes = require("./routes/user");
@@ -20,7 +23,7 @@ const options = {
 } */
 
 
-let allowed = ["http://localhost:8000", "some other link"];
+let allowed = ["http://localhost:3000", "some other link"];
 
 // FOR MULTIPLE ORIGIN
 function options(req, res){

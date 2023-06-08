@@ -2,6 +2,7 @@
 import './style.css'
 import {Formik, Form} from "formik";
 import {Link} from "react-router-dom";
+import LoginInput from '../../components/inputs/loginInput';
 export default function Login() {
   return (
     <div className="login">
@@ -19,8 +20,8 @@ export default function Login() {
                 {
                   (formik)=>(
                     <Form>
-                      <input type="text" />
-                      <input type="text" />
+                      <LoginInput />
+                      <LoginInput />
                       <button type="submit" className="blue_btn">Logi In</button>
                     </Form>
                   )

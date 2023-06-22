@@ -2,7 +2,7 @@ import "./style.css";
 import { useField, ErrorMessage } from "formik";
 import { useMediaQuery } from "react-responsive";
 
-export default function LoginInput({ placeholder, bottom, ...props }) {
+export default function RegisterInput({ placeholder, bottom, ...props }) {
   /* 
     DESTRUCTRING:
       It is necessary to understand destructuring in this case as we are taking props from function signature.

@@ -6,6 +6,13 @@ const {readdirSync} = require('fs'); //fs: file system
 const app = express();
 // This method is used to parse the incoming requests with JSON payloads. 
 // Builtin middleware function json() in express
+const options = {
+    origin:"http://localhost:3000",
+    optionSuccessStatus: 200, //some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
+app.use(cors(options));
+
 app.use(express.json());
 
 // STATIC WAY for routes
@@ -16,33 +23,28 @@ app.use("/api", userRoutes) */
 readdirSync("./routes/").map((r) => app.use('/', require("./routes/" + r)));
 
 // FOR SINGLE ORIGIN
-/* 
-const options = {
-    origin:"http://localhost:3000",
-    optionSuccessStatus: 200, //some legacy browsers (IE11, various SmartTVs) choke on 204
-} */
 
 
-let allowed = ["http://localhost:3000", "some other link"];
+
+// let allowed = ["http://localhost:3000", "some other link"];
 
 // FOR MULTIPLE ORIGIN
-function options(req, res){
-    let tmp;
-    let origin = req.header("Origin");
-    if(allowed.indexOf(origin) > -1){
-        tmp = {
-            origin: true,
-            optionSuccessStatus:200,
-        }
-    }else{
-        tmp = {
-            origin:'stupid',
-        };
-    }
-    res(null, tmp);
-}
+// function options(req, res){
+//     let tmp;
+//     let origin = req.header("Origin");
+//     if(allowed.indexOf(origin) > -1){
+//         tmp = {
+//             origin: true,
+//             optionSuccessStatus:200,
+//         }
+//     }else{
+//         tmp = {
+//             origin:'stupid',
+//         };
+//     }
+//     res(null, tmp);
+// }
 
-app.use(cors(options));
 
 
 

@@ -19,6 +19,8 @@ exports.register = async (req, res) => {
       bDay,
       gender,
     } = req.body;
+    console.log(req.body.first_name);
+    console.log(req.body);
     //check for valid email is entered
     if (!validateEmail(email)) {
       return res.status(400).json({
@@ -50,6 +52,7 @@ exports.register = async (req, res) => {
     }
 
     const cryptedPassword = await bcrypt.hash(password, 12);
+    // const cryptedPassword = "12334as"
 
     let tempUsername = first_name + last_name;
     let newUsername = await validateUsername(tempUsername);
@@ -66,7 +69,7 @@ exports.register = async (req, res) => {
     }).save();
 
     const emailVerificationToken = generateToken({ id: user._id.toString() }, "30m");
-    // console.log(emailVerificationToken);
+    console.log(emailVerificationToken);
     const url = `${process.env.BASE_URL}/activate/${emailVerificationToken}`;
     sendVerificationEmail(user.email, user.first_name, url);
     const token = generateToken({ id: user._id.toString() }, "7d");
@@ -76,15 +79,14 @@ exports.register = async (req, res) => {
       picture: user.picture,
       first_name: user.first_name,
       last_name: user.last_name,
-      token: token,
+      token: "token",
       verified: user.verified,
       message: "Register success! Please activate to continue further",
     });
   } catch (error) {
-    res.status(500).json({ message: error.message })
-  }
-  // console.log(req.body);
 
+    res.status(500).json({message: error.message })
+  }
 };
 
 exports.activateAccount = async (req, res) => {

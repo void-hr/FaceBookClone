@@ -264,6 +264,18 @@
 
 /*----dob and gender errors-----*/
 
+
+/* ----error and success msg styles(BACKEND)----  */
+.error_text {
+    color: red;
+}
+
+.success_text {
+    color: var(--green-color);
+}
+
+/* ----error and success msg styles(BACKEND)----  */
+
 /*----Media queries--------------*/
 @media (min-width: 539px) {
     .login_footer_wrap {

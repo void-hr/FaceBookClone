@@ -6,12 +6,11 @@ import DateOfBirthSelect from "./DateOfBirthSelect";
 import GenderSelect from "./GenderSelect";
 import BarLoader from "react-spinners/BarLoader";
 import axios from "axios";
-import {useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
-import {useNavigate} from "react-router-dom";
-
-export default function RegisterForm() {
+export default function RegisterForm({setVisible}) {
   const userInfos = {
     first_name: "",
     last_name: "",
@@ -71,24 +70,28 @@ export default function RegisterForm() {
       )
       .email("Enter a valid email address"),
     password: Yup.string()
-    .required("Ener a combination of at least six numbers, letters and punctuation marks(such as ! and &).")
-    .min(6, "Password must be atleast 6 characters.")
-    .max(36, "Password can't be more than 36  characters."),
+      .required(
+        "Ener a combination of at least six numbers, letters and punctuation marks(such as ! and &)."
+      )
+      .min(6, "Password must be atleast 6 characters.")
+      .max(36, "Password can't be more than 36  characters."),
   });
 
-  const [dateError , setDateError] = useState(""); 
+  const [dateError, setDateError] = useState("");
   const [genderError, setGenderError] = useState("");
- 
 
- 
+  
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const registerSubmit = async () => {
+    setLoading(true)
     try {
-      const {data} = await axios.post(`http://localhost:8000/register `,{
+      
+      const { data } = await axios.post(`http://localhost:8000/register `, {
         first_name,
         last_name,
         email,
@@ -100,25 +103,27 @@ export default function RegisterForm() {
       });
 
       setError("");
+      setLoading(false); 
       setSuccess(data.message);
-      const {message, ...rest} = data;
+      const { message, ...rest } = data;
       setTimeout(() => {
-        dispatch({type:"LOGIN", payload:rest});
-        Cookies.set('user', JSON.stringify(rest));
+        dispatch({ type: "LOGIN", payload: rest });
+        Cookies.set("user", JSON.stringify(rest));
         navigate("/");
       }, 2000);
-    } catch(error){
+      
+    } catch (error) {
       setLoading(false);
       setSuccess("");
       setError(error.response.data.message);
     }
   };
-  
+
   return (
     <div className="blur">
       <div className="register">
         <div className="register_header">
-          <i className="exit_icon"></i>
+          <i onClick={() => setVisible(false)}className="exit_icon"></i>
           <span>Sign Up</span>
           <span>it's quick and easy</span>
         </div>
@@ -135,8 +140,7 @@ export default function RegisterForm() {
             gender,
           }}
           validationSchema={registerValidation}
-          onSubmit = {() => {
-
+          onSubmit={() => {
             let current_date = new Date();
             let picked_date = new Date(bYear, bMonth - 1, bDay);
             console.log(picked_date);
@@ -144,30 +148,28 @@ export default function RegisterForm() {
             let atmost70 = new Date(1970 + 70, 0, 1);
             // console.log("current:",current_date,"picked_date:", picked_date, "atleast:", atleast14)
             // console.log("diff:", current_date-picked_date)
-            if(current_date - picked_date < atleast14 ){
+            if (current_date - picked_date < atleast14) {
               setDateError(
                 "It looks like you(ve entered the wrong info. Please make sure that you use your real date of birth."
-              )
-            } else if(current_date - picked_date > atmost70){
+              );
+            } else if (current_date - picked_date > atmost70) {
               setDateError(
                 "It looks like you(ve entered the wrong info. Please make sure that you use your real date of birth."
-              )
-            } else if(gender === "") {
+              );
+            } else if (gender === "") {
               setDateError("");
               setGenderError(
                 "Please choose a gender. You can change who can see this later."
-              )
-            } else{
+              );
+            } else {
               setDateError("");
               setGenderError("");
               registerSubmit();
             }
-
           }}
-        > 
+        >
           {(formik) => (
             <Form className="register_form">
-
               <div className="reg_line">
                 <RegisterInput
                   type="text"
@@ -215,8 +217,8 @@ export default function RegisterForm() {
                 <div className="reg_line_header">
                   Date of Birith <i className="info_icon"></i>
                 </div>
-                <DateOfBirthSelect 
-                  bDay={bDay} 
+                <DateOfBirthSelect
+                  bDay={bDay}
                   bMonth={bMonth}
                   bYear={bYear}
                   days={days}
@@ -248,9 +250,8 @@ export default function RegisterForm() {
               </div>
 
               <BarLoader color="#1876f2" loading={loading} size={150} />
-              {error && <div className="error_text">{error}</div> }
-              {success && <div className="success_text">{success}</div> }
-
+              {error && <div className="error_text">{error}</div>}
+              {success && <div className="success_text">{success}</div>}
             </Form>
           )}
         </Formik>

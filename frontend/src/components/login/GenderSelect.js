@@ -28,7 +28,7 @@ export default function GenderSelect({ handleRegisterChange, genderError }) {
       </label>
 
       <label htmlFor="female">
-        Male
+        Female
         <input
           type="radio"
           name="gender"
@@ -39,7 +39,7 @@ export default function GenderSelect({ handleRegisterChange, genderError }) {
       </label>
 
       <label htmlFor="custom">
-        Male
+        Custom
         <input
           type="radio"
           name="gender"

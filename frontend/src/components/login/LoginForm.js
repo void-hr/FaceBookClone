@@ -30,7 +30,8 @@ export default function LoginForm({setVisible}) {
     password: Yup.string().min(3).required("Password is required"),
   });
 
-  const [error, setError] = useState("error");
+  const [error, setError] = useState("");
+  
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -38,8 +39,7 @@ export default function LoginForm({setVisible}) {
   const loginSubmit = async () => {
     setLoading(true)
     try {
-      console.log(process.env.REACT_APP_BACKEND_URL)
-      const { data } = await axios.post(`${process.env.REACT_APP_BACKEND_URL}login`, {
+      const { data } = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/login`, {
         email,
         password,
       });

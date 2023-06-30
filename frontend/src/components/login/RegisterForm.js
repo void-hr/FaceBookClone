@@ -91,7 +91,7 @@ export default function RegisterForm({setVisible}) {
     setLoading(true)
     try {
       
-      const { data } = await axios.post(`http://localhost:8000/register `, {
+      const { data } = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/register`, {
         first_name,
         last_name,
         email,
@@ -195,15 +195,7 @@ export default function RegisterForm({setVisible}) {
                 />
               </div>
 
-              <div className="reg_line">
-                <RegisterInput
-                  type="text"
-                  placeholder="Mobile number or email address"
-                  name="email"
-                  onChange={handleRegisterChange}
-                />
-              </div>
-
+            
               <div className="reg_line">
                 <RegisterInput
                   type="password"
@@ -246,7 +238,7 @@ export default function RegisterForm({setVisible}) {
                 notifications from us and can opt out at any time.
               </div>
               <div className="reg_btn_wrapper">
-                <button className="blue_btn open_signup">Sign Up</button>
+                <button type="submit" className="blue_btn open_signup">Sign Up</button>
               </div>
 
               <BarLoader color="#1876f2" loading={loading} size={150} />

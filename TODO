@@ -1,6 +1,8 @@
 High Priority:
     He have made his store and  Browser router in index.js,
     but because he is using older version. since, I can't understand I made this in App.js.
+    - useRef, useEffect
+    - JWT, mail outh
 
 Low Priority:
     update reducer, instead use reducer tool kit.

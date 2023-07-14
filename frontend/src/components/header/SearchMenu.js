@@ -6,9 +6,11 @@ export default function SearchMenu({ color, setShowSearchMenu }) {
     const [iconVisible, setIconVisible] = useState(true);
     const menu = useRef(null);
     const input = useRef(null);
+    
     useClickOutside(menu, ()=> {
         setShowSearchMenu(false);
     });
+
     useEffect(() => {
         input.current.focus();
     }, [])

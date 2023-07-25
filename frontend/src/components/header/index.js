@@ -86,7 +86,9 @@ function Header() {
 						onClick={() => {
 							setShowAllMenu((prev) => !prev);
 						}}>
-						<Menu />
+						<div style={{ transform: "translateY(2px)" }}>
+							<Menu />
+						</div>
 					</div>
 					{showAllMenu && <AllMenu />}
 				</div>
@@ -101,7 +103,9 @@ function Header() {
 					className={`circle_icon hover1 ${showUserMenu && "active_header"}`}
 					ref={usermenu}>
 					<div onClick={() => setShowUserMenu((prev) => !prev)}>
-						<ArrowDown />
+						<div style={{ transform: "translateY(2px)" }}>
+							<ArrowDown />
+						</div>
 					</div>
 					{showUserMenu && <UserMenu user={user} />}
 				</div>

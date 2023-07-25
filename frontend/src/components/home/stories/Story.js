@@ -5,7 +5,7 @@ export default function Story({ story }) {
 			<div className="story_profile_pic">
 				<img src={story.profile_picture} alt="" className="" />
 			</div>
-			<div className="story_profile_name">{story.proifle.name}</div>
+			<div className="story_profile_name">{story.profile_name}</div>
 		</div>
 	);
 }

@@ -5,6 +5,7 @@ import Profile from "./pages/profile";
 import Home from "./pages/home";
 import LoggedInRoutes from "./routes/LoggedInRoutes";
 import NotLoggedInRoutes from "./routes/NotLoggedInRoutes";
+import Activate from "./pages/home/activate";
 
 function App() {
 	const { user } = useSelector((state) => ({ ...state }));
@@ -24,6 +25,8 @@ function App() {
 				<Route element={<LoggedInRoutes />}>
 					<Route path="/profile" element={<Profile />} exact></Route>
 					<Route path="/" element={<Home />} exact></Route>
+					<Route path="/activate/:token" element={<Activate />} exact></Route>
+
 				</Route>
 
 				<Route element={<NotLoggedInRoutes />}>

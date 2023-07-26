@@ -137,4 +137,9 @@ exports.login = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
+};
+
+exports.auth = (req, res)=> {
+  console.log(req.user);
+  res.json('welcomoe to auth')
 }

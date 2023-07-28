@@ -40,11 +40,11 @@ export default function Activate() {
         try{
             setLoading(true);
             const {data} = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/activate`,{token},{
-                header:{
+                headers:{
                     Authorization: `Bearer ${user.token}`,
                 }
-            })
-            console.log("succesfull")
+            });
+
             setSuccess(data.message);
             Cookie.set('user', JSON.stringify({...user, verified: true}));
             dispatch({
@@ -52,14 +52,14 @@ export default function Activate() {
                 payload: true,
             })
             setTimeout(()=>{
-                // navigate("/")
+                navigate("/")
             },3000);
             setLoading(false);
         }catch(error){
             console.log(error.response.data);
             setError(error.response.data.message);
             setTimeout(()=>{
-                // navigate("/")
+                navigate("/")
             },3000);
         }
     }

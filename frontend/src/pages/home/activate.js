@@ -10,7 +10,7 @@ import "./style.css";
 import CreatePost from "../../components/createPost";
 import ActivateForm from "./ActivateForm";
 import axios from "axios";
-// import Cookie from "js-cookie";
+import Cookies from "js-cookie";
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function Activate() {
@@ -36,9 +36,9 @@ export default function Activate() {
 				`${process.env.REACT_APP_BACKEND_URL}/activate`,
 				{ token },
 				{
-					// header:{
-					//     Authorization: `Bearer ${user.token}`,
-					// }
+					header: {
+						Authorization: `Bearer ${user.token}`,
+					},
 				}
 			);
 			console.log("succesfull");

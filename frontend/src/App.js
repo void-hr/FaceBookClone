@@ -9,6 +9,7 @@ import Activate from "./pages/home/activate";
 
 function App() {
 	const { user } = useSelector((state) => ({ ...state }));
+	console.log(user)
 	// const get=async()=>{
 	//   try{
 	//     const res = await fetch('http://localhost:8000')

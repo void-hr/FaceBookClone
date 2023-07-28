@@ -14,7 +14,8 @@ export default function Home() {
 	// useClickOutSide(el, () => {
 	// 	setVisible(false);
 	// });
-	const { user } = useSelector((user) => ({ ...user }));
+	const  {user} = useSelector((user) => ({ ...user }));
+	console.log(user.token)
 	return (
 		<div className="home">
 			<Header />

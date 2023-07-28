@@ -70,7 +70,7 @@ exports.register = async (req, res) => {
 
     const emailVerificationToken = generateToken({ id: user._id.toString() }, "30m");
     console.log(emailVerificationToken);
-    const url = `${process.env.BASE_URL}/activate/${emailVerificationToken}`;
+    const url = `${process.env.BASE_URL}activate/${emailVerificationToken}`;
     sendVerificationEmail(user.email, user.first_name, url);
     const token = generateToken({ id: user._id.toString() }, "7d");
     res.send({
@@ -90,11 +90,22 @@ exports.register = async (req, res) => {
 };
 
 exports.activateAccount = async (req, res) => {
+  console.log('user', req.user)
   try {
+    const validUser = req.user.id;
     const { token } = req.body;
+    console.log(token)
     const user = jwt.verify(token, process.env.TOKEN_SECRET);
     console.log(user);
     const check = await User.findById(user.id);
+    if(validUser !== user){
+      return res
+        .status(400)
+        .json({
+          message:
+          "you don't have the authorization to complete this operation."
+        })
+    }
     if (check.verified === true) {
       return res.status(400).json({ message: 'e email to baabe phla e activated aa' })
     } else {

@@ -20,7 +20,8 @@
 	.right_home {
 		width: 18vw;
 	}
-	.createPost {
+	.createPost,
+	.send_verification {
 		width: 84% !important;
 	}
 }
@@ -60,12 +61,14 @@
 	.stories {
 		width: 100%;
 	}
-	.createPost {
+	.createPost,
+	.send_verification {
 		width: 93% !important;
 	}
 }
 @media (max-width: 960px) {
-	.createPost {
+	.createPost,
+	.send_verification {
 		width: 120%;
 	}
 	.stories {
@@ -92,7 +95,8 @@
 	.right_home {
 		display: none;
 	}
-	.createPost {
+	.createPost,
+	.send_verification {
 		width: 110% !important;
 	}
 	.stories {
@@ -123,7 +127,7 @@
 	.left_home::-webkit-scrollbar {
 		display: none;
 	}
-	.pop{
+	.pop {
 		width: 70vw !important;
 	}
 }
@@ -136,7 +140,8 @@
 		margin-left: 0;
 	}
 	.stories,
-	.createPost {
+	.createPost,
+	.send_verification {
 		width: 100%;
 	}
 	.stories .white_circle {
@@ -161,13 +166,14 @@
 }
 
 @media (max-width: 600px) {
-	.createPost {
+	.createPost,
+	.send_verification {
 		width: 100% !important;
 	}
 }
 
 /* -----Activate popup ----- */
-.popup{
+.popup {
 	position: relative;
 	background: var(--bg-primary);
 	box-shadow: 0 1px 2px var(--shadow-1);
@@ -182,7 +188,7 @@
 	border-radius: 10px;
 }
 
-.popup_header{
+.popup_header {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -191,7 +197,7 @@
 	padding: 15px;
 }
 
-.popup_message{
+.popup_message {
 	padding: 15px;
 	font-weight: 500;
 }

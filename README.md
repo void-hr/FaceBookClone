@@ -43,4 +43,7 @@ For nodemon:
 "scripts": {
     "server": "nodemon server.js"
   },
+```
 
+### Refrences:
+To update node modules: https://stackoverflow.com/questions/34202617/how-to-update-all-node-js-modules-automatically

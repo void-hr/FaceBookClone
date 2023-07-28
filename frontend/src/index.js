@@ -1,12 +1,21 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import "./index.css";
 import "./styles/icons/icons.css";
 import App from "./App";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById("root")
+import { createRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
+import { composeWithDevTools } from "redux-devtools-extension";
+import rootReducer from "./reducers";
+const container = document.getElementById("root");
+const root = createRoot(container); // createRoot(container!) if you use TypeScript
+const store = createStore(rootReducer, composeWithDevTools());
+root.render(
+	<Provider store={store}>
+		<BrowserRouter>
+			<App />
+		</BrowserRouter>
+	</Provider>
 );

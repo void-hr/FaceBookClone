@@ -90,15 +90,13 @@ exports.register = async (req, res) => {
 };
 
 exports.activateAccount = async (req, res) => {
-  console.log('user', req.user)
   try {
     const validUser = req.user.id;
     const { token } = req.body;
-    console.log(token)
     const user = jwt.verify(token, process.env.TOKEN_SECRET);
     console.log(user);
     const check = await User.findById(user.id);
-    if(validUser !== user){
+    if(validUser !== user.id){
       return res
         .status(400)
         .json({

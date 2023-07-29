@@ -6,10 +6,11 @@ import Home from "./pages/home";
 import LoggedInRoutes from "./routes/LoggedInRoutes";
 import NotLoggedInRoutes from "./routes/NotLoggedInRoutes";
 import Activate from "./pages/home/activate";
+import Reset from "./pages/reset";
 
 function App() {
 	const { user } = useSelector((state) => ({ ...state }));
-	console.log(user)
+	console.log(user);
 	// const get=async()=>{
 	//   try{
 	//     const res = await fetch('http://localhost:8000')
@@ -27,12 +28,12 @@ function App() {
 					<Route path="/profile" element={<Profile />} exact></Route>
 					<Route path="/" element={<Home />} exact></Route>
 					<Route path="/activate/:token" element={<Activate />} exact></Route>
-
 				</Route>
 
 				<Route element={<NotLoggedInRoutes />}>
 					<Route path="/login" element={<Login />} exact></Route>
 				</Route>
+				<Route path="/reset" element={<Reset />} />
 			</Routes>
 		</div>
 	);

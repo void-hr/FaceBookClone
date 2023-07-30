@@ -13,11 +13,11 @@ export default function Reset() {
 	const { user } = useSelector((state) => ({ ...state }));
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const { email, setEmail } = useState("");
-	const { error, setError } = useState("");
-	const { code, setCode } = useState("");
-	const { password, setPassword } = useState("");
-	const { conf_password, setConf_password } = useState("");
+	const [email, setEmail] = useState("");
+	const [error, setError] = useState("");
+	const [code, setCode] = useState("");
+	const [password, setPassword] = useState("");
+	const [conf_password, setConf_password] = useState("");
 
 	const [visible, setVisible] = useState(0);
 	const logout = () => {

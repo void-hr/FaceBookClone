@@ -2,13 +2,30 @@ import { Formik, Form } from "formik";
 import { Link } from "react-router-dom";
 import LoginInput from "../../components/inputs/loginInput";
 import * as Yup from "yup";
-export default function SearchAccount({ email, setEmail, error }) {
+import axios from "axios";
+
+export default function SearchAccount({ email, setEmail, error, setLoading, setUserInfos, setVisible, setError}) {
 	const validateEmail = Yup.object({
 		email: Yup.string()
 			.required("Email address is required.")
 			.email("Must be a valid email address.")
 			.max(50, "Email address can't be more than 50 characters."),
 	});
+	const handleSearch = async() => {
+		try{
+			setLoading(true);
+
+			const {data} = await axios.post(
+				`${process.env.REACT_APP_BACKEND_URL}/findUser`,
+				{ email }
+			);
+			setUserInfos(data);
+			setVisible(1);
+		}catch(error){
+			setLoading(false);
+			setError(error.response.data.message);
+		}
+	}
 	return (
 		<div className="reset_form">
 			<div className="reset_form_header">Find Your Account</div>
@@ -21,7 +38,11 @@ export default function SearchAccount({ email, setEmail, error }) {
 				initialValues={{
 					email,
 				}}
-				validationSchema={validateEmail}>
+				validationSchema={validateEmail}
+				onSubmit={()=>{
+					handleSearch();
+				}}
+				>
 				{(formik) => (
 					<Form>
 						<LoginInput

@@ -1,14 +1,34 @@
 import { Formik, Form } from "formik";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import LoginInput from "../../components/inputs/loginInput";
 import * as Yup from "yup";
+import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
+
 export default function ChangePassword({
 	password,
+	email,
 	setPassword,
 	conf_password,
 	setConf_password,
 	error,
+	setLoading,
+	setVisible,
+	setError,
 }) {
+
+	const navigate = useNavigate();
+	const handelChangePassword = async() => {
+		try{
+			setLoading(true);
+			await axios.post(`${process.env.REACT_APP_BACKEND_URL}/changePassword`, {email, password});
+			setError("");
+			navigate("/");
+		}catch(error){
+			setError(error.data.message);
+			setLoading(false);
+		}
+	}
 	const validatePassword = Yup.object({
 		password: Yup.string()
 			.required(
@@ -31,6 +51,7 @@ export default function ChangePassword({
 					password,
 					conf_password,
 				}}
+				onSubmit={()=>handelChangePassword()}
 				validationSchema={validatePassword}>
 				{(formik) => (
 					<Form>

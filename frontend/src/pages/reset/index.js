@@ -14,7 +14,7 @@ export default function Reset() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [ loading, setLoading ] = useState(false);
-  const [ email, setEmail ] = useState("paliwalap7@gmail.com");
+  const [ email, setEmail ] = useState("");
   const [ password, setPassword ] = useState("");
   const [ conf_password, setConf_password ] = useState("");
   const [ error, setError ] = useState("");

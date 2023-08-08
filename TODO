@@ -6,6 +6,7 @@ High Priority:
     - learn bout useSelector
 
 Low Priority:
-    update reducer, instead use reducer tool kit. and offcourse learn more bout it
+    - update reducer, instead use reducer tool kit. and offcourse learn more bout it
 
-    Understand that Date thing used in sign up form
+    - Understand that Date thing used in sign up form
+    - We use loading in forget password I think it is of no use so please check.  

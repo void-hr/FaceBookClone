@@ -11,20 +11,20 @@ import CreatePostPopup from "./components/createPostPopup";
 
 function App() {
 	const { user } = useSelector((state) => ({ ...state }));
-	console.log(user);
-	const get=async()=>{
-	  try{
-	    const res = await fetch('http://localhost:8000')
-	  }
-	  catch{
-	    alert("problem");
-	  }
-	}
+	// console.log(user);
+	// const get=async()=>{
+	//   try{
+	//     const res = await fetch('http://localhost:8000')
+	//   }
+	//   catch{
+	//     alert("problem");
+	//   }
+	// }
 
 	// get();
 	return (
 		<div>
-			<CreatePostPopup user={user}/>
+					<CreatePostPopup user={user}/>	
 			<Routes>
 				<Route element={<LoggedInRoutes />}>
 					<Route path="/profile" element={<Profile />} exact></Route>

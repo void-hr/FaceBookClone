@@ -21,11 +21,11 @@ export default function EmojiPickerBackground({text, user, setText, type2}) {
       setCursorPosition(start.length + e.emoji.length);
   }
   return (
-    <div className={type2 && "images_input"}>
-      <div className={!type2 && "flex_center"}>
+    <div className={type2 ? "images_input" : ""}>
+      <div className={!type2 ? "flex_center" : ""}>
           <textarea
             maxLength="100"
-            className={`post_input ${type2 && "input2"}`}
+            className={`post_input ${type2 ? "input2": ""}`}
             placeholder={`What's on you mind, ${user?.first_name}`}
             onChange = {(e)=> setText(e.target.value)}
             value={text}

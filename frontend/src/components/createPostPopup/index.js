@@ -10,7 +10,8 @@ export default function CreatePostPopup({user }){
     const [text, setText] = useState();
     const [picker, setPicker] = useState(false);
     const [cursorPosition, setCursorPosition] = useState();
-    const [images, setImages] = useState();
+    const [images, setImages] = useState([]);
+    console.log("images", images);
     const textRef = useRef(null);
    return (
     <div className="blur">
@@ -48,8 +49,6 @@ export default function CreatePostPopup({user }){
             </div> */}
             {!showPrev ? (
                 <>
-                  
-
                     <EmojiPickerBackground
                        text={text}
                        user={user}
@@ -59,7 +58,12 @@ export default function CreatePostPopup({user }){
                        setImages={setImages}
                     />
                 </>
-            ):(<ImagePreview/>)}
+            ):(
+                <ImagePreview
+                    setImages={setImages}
+                    images={images}
+                />
+            )}
             
             
             

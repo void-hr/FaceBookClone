@@ -3,22 +3,38 @@ import EmojiPickerBackground from "./EmojiPickerBackground"
 
 export default function ImagePreview({ text, user, setText, images, setImages }) {
   const imageInputRef = useRef(null);
-  const handleImages = () => {
-
+  const handleImages = (e) => {
+    let files = Array.from(e.target.files);
+    console.log(files)
+    files.forEach((img)=>{
+      const reader = new FileReader();
+      reader.readAsDataURL(img);
+      console.log("reader", reader);
+      reader.onload=(readerEvent)=>{
+        setImages((images) => [ ...images, readerEvent.target.result ]);
+      };
+    });
   };
   return (
     <div className="overflow_a">
       {/* <h1>img prev</h1> */}
       <EmojiPickerBackground text={text} user={user} setText={setText} type2/>
       <div className="add_pics_wrap">
-        <input type="file" multiple hidden ref={imageInputRef} onChange={handleImages}/>
-      {
-        images && images.length ? "":
+      <input
+          type="file"
+          multiple
+          hidden
+          ref={imageInputRef}
+          onChange={handleImages}
+        />   
+
+        {
+        images && images.length ?  "" :
         <div className="add_pics_inside1">
           <div className="small_white_circle">
             <i className="exit_icon"></i>
           </div>
-          <div className="add_col">
+          <div className="add_col" onClick={()=>{imageInputRef.current.click();}}>
             <div className="add_circle">
               <i className="addPhoto_icon"></i>
             </div>
@@ -27,6 +43,13 @@ export default function ImagePreview({ text, user, setText, images, setImages })
           </div>
         </div>
       }
+      <div className="add_pics_inside2">
+        <div className="add_circle">
+          <i className="phone_icon"></i>
+        </div>
+        <div className="mobile_text">Add photos from your mobile device.</div>
+        <span className="addphone_btn">Add</span>
+      </div>
       </div>
     </div>
   )

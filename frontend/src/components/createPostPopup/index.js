@@ -2,12 +2,16 @@ import { useRef, useState } from "react";
 import "./style.css";
 import EmojiPickerBackground from "./EmojiPickerBackground";
 import AddToYourPost from "./AddToYourPost";
-import ImagePreview from "./imagePreview";
-export default function CreatePostPopup({ user }) {
-	const [text, setText] = useState("");
-	const [showPrev, setShowPrev] = useState(true);
-	const textRef = useRef(null);
+import ImagePreview from "./ImagePreview";
 
+export default function CreatePostPopup({ user }) {
+	const [showPrev, setShowPrev] = useState(true);
+	const [text, setText] = useState();
+	const [picker, setPicker] = useState(false);
+	const [cursorPosition, setCursorPosition] = useState();
+	const [images, setImages] = useState([]);
+	console.log("images", images);
+	const textRef = useRef(null);
 	return (
 		<div className="blur">
 			<div className="postBox">
@@ -18,39 +22,45 @@ export default function CreatePostPopup({ user }) {
 					<span>Create Post</span>
 				</div>
 				<div className="box_profile">
-					<img src={user.picture} alt="" className="box_profile_img" />
+					<img src={user?.picture} alt="" className="box_profile_img" />
 					<div className="box_col">
 						<div className="box_profile_name">
-							{user.first_name} {user.last_name}
+							{user?.first_name} {user?.last_name}
 						</div>
 						<div className="box_privacy">
-							<img src="../../../icons/public.png" alt="" />
+							<img src="../../icons/public.png" alt="" />
 							<span>Public</span>
 							<i className="arrowDown_icon"></i>
 						</div>
 					</div>
 				</div>
-
+				{/* <div className="flex_center">
+                <textarea 
+                 maxLength="100"
+                 className="post_input"
+                 placeholder={`What's on you mind, ${user?.first_name}`}
+                 onChange = {(e)=> setText(e.target.value)}
+                 value={text}
+                 ref={textRef}
+                >
+                </textarea>
+                
+            </div> */}
 				{!showPrev ? (
 					<>
-						<div className="flex_center">
-							<textarea
-								ref={textRef}
-								maxLength="100"
-								value={text}
-								placeholder={`What's on your mind, ${user.first_name}`}
-								className="post_input"
-								onChange={(e) => setText(e.target.value)}></textarea>
-						</div>
 						<EmojiPickerBackground
 							text={text}
-							textRef={textRef}
+							user={user}
 							setText={setText}
+							showPrev={showPrev}
+							images={images}
+							setImages={setImages}
 						/>
 					</>
 				) : (
-					<ImagePreview />
+					<ImagePreview setImages={setImages} images={images} />
 				)}
+
 				<AddToYourPost />
 				<button className="post_submit">Post</button>
 			</div>

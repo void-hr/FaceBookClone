@@ -1,5 +1,7 @@
 const express = require("express");
 const cors = require("cors");
+const fileUpload = require("express-fileupload");
+
 const dotenv = require("dotenv").config();
 const mongoose = require("mongoose");
 const { readdirSync } = require("fs"); //fs: file system
@@ -12,8 +14,12 @@ const options = {
 };
 
 app.use(cors(options));
-
 app.use(express.json());
+app.use(
+	fileUpload({
+		useTempFiles: true,
+	})
+);
 
 // STATIC WAY for routes
 /* const userRoutes = require("./routes/user");

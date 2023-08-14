@@ -13,7 +13,7 @@ export default function EmojiPickerBackground({ text, user, setText, type2 }) {
 
 	const handleEmoji = (e) => {
 		const ref = textRef;
-		ref.focus();
+		ref.current.focus();
 		const start = text.substring(0, ref.selectionStart);
 		const end = text.substring(ref.selectionStart);
 		const newText = start + e.emoji + end;
@@ -31,7 +31,8 @@ export default function EmojiPickerBackground({ text, user, setText, type2 }) {
 					value={text}
 					ref={textRef}></textarea>
 			</div>
-			<div className={!type2 && "post_emojis_wrap"}>
+			{/* changed a && b => a ? b : c since className was having false as a value */}
+			<div className={!type2 ? "post_emojis_wrap" : ""}>
 				{picker && (
 					<div
 						className={`comment_emoji_picker ${

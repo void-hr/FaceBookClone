@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import "./style.css";
 import EmojiPickerBackground from "./EmojiPickerBackground";
 import AddToYourPost from "./AddToYourPost";
@@ -7,11 +7,8 @@ import ImagePreview from "./ImagePreview";
 export default function CreatePostPopup({ user }) {
 	const [showPrev, setShowPrev] = useState(true);
 	const [text, setText] = useState();
-	const [picker, setPicker] = useState(false);
-	const [cursorPosition, setCursorPosition] = useState();
 	const [images, setImages] = useState([]);
 	console.log("images", images);
-	const textRef = useRef(null);
 	return (
 		<div className="blur">
 			<div className="postBox">
@@ -53,15 +50,21 @@ export default function CreatePostPopup({ user }) {
 							user={user}
 							setText={setText}
 							showPrev={showPrev}
-							images={images}
-							setImages={setImages}
 						/>
 					</>
 				) : (
-					<ImagePreview setImages={setImages} images={images} />
+					<ImagePreview
+						text={text}
+						user={user}
+						setText={setText}
+						showPrev={showPrev}
+						images={images}
+						setImages={setImages}
+						setShowPrev={setShowPrev}
+					/>
 				)}
 
-				<AddToYourPost />
+				<AddToYourPost setShowPrev={setShowPrev} />
 				<button className="post_submit">Post</button>
 			</div>
 		</div>

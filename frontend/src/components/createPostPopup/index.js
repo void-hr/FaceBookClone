@@ -1,21 +1,29 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "./style.css";
 import EmojiPickerBackground from "./EmojiPickerBackground";
 import AddToYourPost from "./AddToYourPost";
 import ImagePreview from "./ImagePreview";
+import useClickOutSide from "../../helpers/clickOutside";
 
-export default function CreatePostPopup({ user }) {
+export default function CreatePostPopup({ user, setVisible }) {
+	const popup = useRef(null);
 	const [showPrev, setShowPrev] = useState(false);
 	const [text, setText] = useState();
 	const [images, setImages] = useState([]);
 	const [background, setBackground] = useState("");
-
+	useClickOutSide(popup, () => {
+		setVisible(false);
+	});
 	console.log("images", images);
 	return (
 		<div className="blur">
-			<div className="postBox">
+			<div className="postBox" ref={popup}>
 				<div className="box_header">
-					<div className="small_circle">
+					<div
+						className="small_circle"
+						onClick={() => {
+							setVisible(false);
+						}}>
 						<i className="exit_icon"></i>
 					</div>
 					<span>Create Post</span>

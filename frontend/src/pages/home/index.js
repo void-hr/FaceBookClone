@@ -16,7 +16,7 @@ export default function Home({ setVisible }) {
 	// 	setVisible(false);
 	// });
 	const { user } = useSelector((user) => ({ ...user }));
-	console.log(user.token);
+	// console.log(user.token);
 	return (
 		<div className="home">
 			<Header />

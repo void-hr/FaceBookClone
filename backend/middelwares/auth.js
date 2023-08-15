@@ -4,7 +4,7 @@ exports.authUser = async (req, res, next) => {
 	try {
 		let tmp = req.header("Authorization");
 		const token = tmp ? tmp.slice(7, tmp.length) : "";
-		console.log(token);
+		// console.log(token);
 		if (!token) {
 			return res.status(400).json({ message: "Invalid abz" });
 		}

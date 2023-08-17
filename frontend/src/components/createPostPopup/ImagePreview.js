@@ -8,12 +8,29 @@ export default function ImagePreview({
 	images,
 	setImages,
 	setShowPrev,
+	setError,
 }) {
 	const imageInputRef = useRef(null);
 	const handleImages = (e) => {
 		let files = Array.from(e.target.files);
 		console.log(files);
 		files.forEach((img) => {
+			if (
+				img.type !== "image/jpeg" &&
+				img.type !== "image/png" &&
+				img.type !== "image/webp" &&
+				img.type !== "image/gif"
+			) {
+				setError(
+					`${img.name} format is unsupported! only JPEG, PNG, WEBP, GIFs are allowed.`
+				);
+				files = files.filter((item) => item.name !== img.name);
+				return;
+			} else if (img.size > 1024 * 1024 * 5) {
+				setError(`${img.name} Size is too large max 5mb is allowed.`);
+				files = files.filter((item) => item.name !== img.name);
+				return;
+			}
 			const reader = new FileReader();
 			reader.readAsDataURL(img);
 			console.log("reader", reader);
@@ -29,6 +46,7 @@ export default function ImagePreview({
 			<div className="add_pics_wrap">
 				<input
 					type="file"
+					accept="image/jpeg,image/png,image/webp,image/gif"
 					multiple
 					hidden
 					ref={imageInputRef}

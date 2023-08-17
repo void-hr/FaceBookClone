@@ -54,11 +54,22 @@ export default function CreatePostPopup({ user, setVisible }) {
 				formData.append("file", image);
 			});
 			const response = await uploadImages(formData, path, user.token);
-			await createPost(null, null, text, response, user.id, user.token);
+			const res = await createPost(
+				null,
+				null,
+				text,
+				response,
+				user.id,
+				user.token
+			);
 			setLoading(false);
-			setText("");
-			setImages("");
-			setVisible(false);
+			if (res === "ok") {
+				setText("");
+				setImages("");
+				setVisible(false);
+			} else {
+				setError(res);
+			}
 		} else if (text) {
 			const res = await createPost(null, null, text, null, user.id, user.token);
 			setLoading(false);
@@ -133,6 +144,7 @@ export default function CreatePostPopup({ user, setVisible }) {
 						images={images}
 						setImages={setImages}
 						setShowPrev={setShowPrev}
+						setError={setError}
 					/>
 				)}
 

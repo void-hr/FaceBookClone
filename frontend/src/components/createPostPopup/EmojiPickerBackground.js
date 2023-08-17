@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import "./style.css";
 
-import React from "react";
 import Picker from "emoji-picker-react";
 export default function EmojiPickerBackground({
 	text,
@@ -19,22 +18,19 @@ export default function EmojiPickerBackground({
 	const bgRef = useRef(null);
 
 	useEffect(() => {
-		textRef.current.selectionEnd = cursorPosition;
+		textRef.current.selectionStart = cursorPosition;
 	}, [cursorPosition]);
 
 	const handleEmoji = (e) => {
-		const ref = textRef;
-		ref.current.focus();
-	
+		const ref = textRef.current;
+		ref.focus();
+
 		const start = text.substring(0, ref.selectionStart);
 		const end = text.substring(ref.selectionStart);
-		const newText = start + e.emoji+ end;
-		console.log("start", start);
-		console.log("end", end);
+		const newText = start + e.emoji + end;
 
-		console.log(newText);
-		setText(newText);
 		setCursorPosition(start.length + e.emoji.length);
+		setText(newText);
 	};
 
 	const postBackgrounds = [

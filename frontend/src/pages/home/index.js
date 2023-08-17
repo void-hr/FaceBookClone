@@ -1,6 +1,6 @@
 import Header from "../../components/header";
-import { useState, useRef } from "react";
-import useClickOutSide from "../../helpers/clickOutside";
+// import { useState, useRef } from "react";
+// import useClickOutSide from "../../helpers/clickOutside";
 import LeftHome from "../../components/home/left";
 import { useSelector } from "react-redux";
 import RightHome from "../../components/home/right";

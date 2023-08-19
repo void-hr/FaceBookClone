@@ -1,5 +1,4 @@
 .home {
-	min-height: 100vh;
 	background: var(--bg-secondary);
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
@@ -21,6 +20,7 @@
 		width: 18vw;
 	}
 	.createPost,
+	.post,
 	.send_verification {
 		width: 84% !important;
 	}
@@ -62,12 +62,14 @@
 		width: 100%;
 	}
 	.createPost,
+	.post,
 	.send_verification {
 		width: 93% !important;
 	}
 }
 @media (max-width: 960px) {
 	.createPost,
+	.post,
 	.send_verification {
 		width: 120%;
 	}
@@ -96,6 +98,7 @@
 		display: none;
 	}
 	.createPost,
+	.post,
 	.send_verification {
 		width: 110% !important;
 	}
@@ -141,6 +144,7 @@
 	}
 	.stories,
 	.createPost,
+	.post,
 	.send_verification {
 		width: 100%;
 	}
@@ -167,6 +171,7 @@
 
 @media (max-width: 600px) {
 	.createPost,
+	.post,
 	.send_verification {
 		width: 100% !important;
 	}

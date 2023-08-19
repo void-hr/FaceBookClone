@@ -9,6 +9,7 @@ import "./style.css";
 import CreatePost from "../../components/createPost";
 import SendVerification from "../../components/sendVerification";
 import Posts from "../../components/posts";
+import { useEffect, useRef, useState } from "react";
 
 export default function Home({ setVisible, posts }) {
 	// const [visible, setVisible] = useState(true);
@@ -17,19 +18,23 @@ export default function Home({ setVisible, posts }) {
 	// 	setVisible(false);
 	// });
 	const { user } = useSelector((user) => ({ ...user }));
-	// console.log(user.token);
+	const middle = useRef(null);
+	const [height, setHeight] = useState();
+	useEffect(() => {
+		setHeight(middle.current.clientHeight);
+	}, []);
+
+	console.log(height);
 	return (
-		<div className="home">
+		<div className="home" style={{ height: `${height + 150}px` }}>
 			<Header />
 			<LeftHome user={user} />
-			<div className="home_middle">
+			<div className="home_middle" ref={middle}>
 				<Stories />
 				<SendVerification user={user} />
 				<CreatePost user={user} setVisible={setVisible} />
 				{posts.map((post) => (
-					<div className="posts">
-						<Posts key={post._id} post={post} />
-					</div>
+					<Posts key={post._id} post={post} />
 				))}
 			</div>
 			{/* {visible && <div className="card" ref={el}></div>} */}

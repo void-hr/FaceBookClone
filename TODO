@@ -7,6 +7,12 @@ High Priority:
 
 Low Priority:
     - update reducer, instead use reducer tool kit. and offcourse learn more bout it
-
     - Understand that Date thing used in sign up form
-    - We use loading in forget password I think it is of no use so please check.  
+    - We use loading in forget password I think it is of no use so please check.
+
+
+Key learnings:
+   
+    - useReducer returns updated state based on actions and can be used instead of useState.
+      App.js contains a function reducer for more reference.
+      As loading, error, posts state needs to be updated in all frequently so to make it more convinient etc. etc.	 		  

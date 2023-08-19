@@ -12,7 +12,10 @@ exports.createPost = async (req, res) => {
 
 exports.getAllPosts = async (req, res) => {
 	try {
-		const posts = await Post.find();
+		// it will return fname lname username gender from user base
+		const posts = await Post.find()
+			.populate("user", "first_name last_name username gender picture")
+			.sort({ createdAt: -1 });
 		res.json(posts);
 	} catch (error) {
 		return res.status(500).json({ message: "ERROR" + error.message });

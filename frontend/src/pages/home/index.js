@@ -9,7 +9,7 @@ import "./style.css";
 import CreatePost from "../../components/createPost";
 import SendVerification from "../../components/sendVerification";
 
-export default function Home({ setVisible }) {
+export default function Home({ setVisible, posts }) {
 	// const [visible, setVisible] = useState(true);
 	// const el = useRef(null);
 	// useClickOutSide(el, () => {
@@ -25,6 +25,11 @@ export default function Home({ setVisible }) {
 				<Stories />
 				<SendVerification user={user} />
 				<CreatePost user={user} setVisible={setVisible} />
+				{posts.map((post) => (
+					<div className="post" key={post._id}>
+						{post._id}
+					</div>
+				))}
 			</div>
 			{/* {visible && <div className="card" ref={el}></div>} */}
 			<RightHome user={user} />

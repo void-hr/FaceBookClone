@@ -34,7 +34,7 @@ export default function Home({ setVisible, posts }) {
 				<SendVerification user={user} />
 				<CreatePost user={user} setVisible={setVisible} />
 				{posts.map((post) => (
-					<Posts key={post._id} post={post} />
+					<Posts key={post._id} post={post} user={user} />
 				))}
 			</div>
 			{/* {visible && <div className="card" ref={el}></div>} */}

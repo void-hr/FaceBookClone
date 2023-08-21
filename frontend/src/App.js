@@ -65,8 +65,14 @@ function App() {
 			{visible && <CreatePostPopup user={user} setVisible={setVisible} />}
 			<Routes>
 				<Route element={<LoggedInRoutes />}>
-					<Route path="/profile" element={<Profile />} exact></Route>
-					<Route path="/profile/:username" element={<Profile />} exact></Route>
+					<Route
+						path="/profile"
+						element={<Profile setVisible={setVisible} />}
+						exact></Route>
+					<Route
+						path="/profile/:username"
+						element={<Profile setVisible={setVisible} />}
+						exact></Route>
 
 					<Route
 						path="/"

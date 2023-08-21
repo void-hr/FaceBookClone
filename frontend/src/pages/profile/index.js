@@ -6,7 +6,12 @@ import axios from "axios";
 import Header from "../../components/header";
 import "./style.css";
 import Cover from "./Cover";
-export default function Profile() {
+import ProfilePictureInfos from "./ProfilePictureInfos";
+import ProfileMenu from "./ProfileMenu";
+import PplYouMayKnow from "./PplYouMayKnow";
+import CreatePost from "../../components/createPost";
+import GridPosts from "./GridPosts";
+export default function Profile({ setVisible }) {
 	const { username } = useParams();
 	const { user } = useSelector((state) => ({ ...state }));
 
@@ -58,6 +63,26 @@ export default function Profile() {
 			<div className="profile_top">
 				<div className="profile_container">
 					<Cover cover={profile.cover} />
+					<ProfilePictureInfos profile={profile} />
+					<ProfileMenu />
+				</div>
+			</div>
+			<div className="profile_bottom">
+				<div className="profile_container">
+					<div className="bottom_container">
+						<PplYouMayKnow />
+						<div className="profile_grid">
+							<div className="profile_left"></div>
+							<div className="profile_right">
+								<CreatePost
+									user={user}
+									profile={profile}
+									setVisible={setVisible}
+								/>
+								<GridPosts />
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

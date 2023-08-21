@@ -6,6 +6,8 @@ const {
 	validateUsername,
 } = require("../helpers/validation");
 const User = require("../models/User");
+const Post = require("../models/Post");
+
 const Code = require("../models/Code");
 const jwt = require("jsonwebtoken");
 // for password encryption

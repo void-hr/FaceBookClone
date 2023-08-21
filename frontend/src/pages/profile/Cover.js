@@ -1,22 +1,21 @@
 import { useRef, useState } from "react";
-import useClickOutSide from "../../helpers/clickOutside";
+import useClickOutside from "../../helpers/clickOutside";
 
 export default function Cover({ cover }) {
-	const [showCoverMenu, setShowCoverMenu] = useState(false);
+	const [showCoverMneu, setShowCoverMenu] = useState(false);
 	const menuRef = useRef(null);
-	useClickOutSide(menuRef, () => setShowCoverMenu(false));
+	useClickOutside(menuRef, () => setShowCoverMenu(false));
 	return (
 		<div className="profile_cover">
 			{cover && <img src={cover} className="cover" alt="" />}
-
-			<div className="update_cover_wrapper">
+			<div className="udpate_cover_wrapper">
 				<div
 					className="open_cover_update"
 					onClick={() => setShowCoverMenu((prev) => !prev)}>
 					<i className="camera_filled_icon"></i>
 					Add Cover Photo
 				</div>
-				{showCoverMenu && (
+				{showCoverMneu && (
 					<div className="open_cover_menu" ref={menuRef}>
 						<div className="open_cover_menu_item hover1">
 							<i className="photo_icon"></i>
@@ -24,7 +23,7 @@ export default function Cover({ cover }) {
 						</div>
 						<div className="open_cover_menu_item hover1">
 							<i className="upload_icon"></i>
-							Upload Photo
+							Uplaod Photo
 						</div>
 					</div>
 				)}

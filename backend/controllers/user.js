@@ -242,8 +242,6 @@ exports.verifyCode = async (req, res) => {
 
 exports.changePassword = async (req, res) => {
 	const { email, password } = req.body;
-	console.log(req);
-	console.log("email:", email, "pass:", password);
 	const cryptedPassword = await bcrypt.hash(password, 12);
 	await User.findOneAndUpdate(
 		{ email },

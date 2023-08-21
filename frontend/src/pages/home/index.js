@@ -27,7 +27,7 @@ export default function Home({ setVisible, posts }) {
 	console.log(height);
 	return (
 		<div className="home" style={{ height: `${height + 150}px` }}>
-			<Header />
+			<Header page="home" />
 			<LeftHome user={user} />
 			<div className="home_middle" ref={middle}>
 				<Stories />

@@ -98,31 +98,31 @@ exports.register = async (req, res) => {
 };
 
 exports.activateAccount = async (req, res) => {
-  try {
-    const validUser = req.user.id;
-    const { token } = req.body;
-    const user = jwt.verify(token, process.env.TOKEN_SECRET);
-    console.log(user);
-    const check = await User.findById(user.id);
-    if(validUser !== user.id){
-      return res
-        .status(400)
-        .json({
-          message:
-          "you don't have the authorization to complete this operation."
-        })
-    }
-    if (check.verified === true) {
-      return res.status(400).json({ message: 'e email to baabe phla e activated aa' })
-    } else {
-      await User.findByIdAndUpdate(user.id, { verified: true });
-      return res.status(200).json({ message: "apka account gets activated sucksexfully" });
-    }
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-
-  }
-}
+	try {
+		const validUser = req.user.id;
+		const { token } = req.body;
+		const user = jwt.verify(token, process.env.TOKEN_SECRET);
+		console.log(user);
+		const check = await User.findById(user.id);
+		if (validUser !== user.id) {
+			return res.status(400).json({
+				message: "you don't have the authorization to complete this operation.",
+			});
+		}
+		if (check.verified === true) {
+			return res
+				.status(400)
+				.json({ message: "e email to baabe phla e activated aa" });
+		} else {
+			await User.findByIdAndUpdate(user.id, { verified: true });
+			return res
+				.status(200)
+				.json({ message: "apka account gets activated sucksexfully" });
+		}
+	} catch (error) {
+		res.status(500).json({ message: error.message });
+	}
+};
 
 exports.login = async (req, res) => {
 	try {
@@ -185,73 +185,81 @@ exports.sendVerification = async (req, res) => {
 	}
 };
 
-
-exports.findUser = async(req,res) =>{
-	try{
-		const {email} = req.body;
-		console.log('email',email);
-		const user = await User.findOne({email}).select("-password");
-		if(!user){
+exports.findUser = async (req, res) => {
+	try {
+		const { email } = req.body;
+		console.log("email", email);
+		const user = await User.findOne({ email }).select("-password");
+		if (!user) {
 			return res.status(400).json({
 				message: "Account does not exists.",
 			});
 		}
-		return  res.status(200).json({
-			email:user.email,
-			picture:user.picture,
-		})
-	}catch(error){
-		res.status(500).json({message:error.message});
+		return res.status(200).json({
+			email: user.email,
+			picture: user.picture,
+		});
+	} catch (error) {
+		res.status(500).json({ message: error.message });
 	}
-}
+};
 
 exports.sendResetPasswordCode = async (req, res) => {
-	try{
-		const {email} = req.body;
+	try {
+		const { email } = req.body;
 		const user = await User.findOne({ email }).select("-password");
 		await Code.findOneAndRemove({ user: user._id });
 		const code = generateCode(5);
 		const savedCode = await new Code({
 			code,
-			user:user._id,
+			user: user._id,
 		}).save();
 		sendResetCode(user.email, user.first_name, code);
 		return res.status(200).json({
-			messsage:"Email reset code has been sent to your email",
+			messsage: "Email reset code has been sent to your email",
 		});
-	} catch(error){
-		res.status(500).json({message:error.message});
+	} catch (error) {
+		res.status(500).json({ message: error.message });
 	}
-}
+};
 
 exports.verifyCode = async (req, res) => {
-	try{
+	try {
 		const { email, code } = req.body;
 
 		const user = await User.findOne({ email });
-		const userCode = await Code.findOne({ user:user._id });
-		if(userCode.code === code){
+		const userCode = await Code.findOne({ user: user._id });
+		if (userCode.code === code) {
 			return res.status(200).json({
-				message:"Ok",
-			})
+				message: "Ok",
+			});
 		}
-		return res.status(500).json({message:"Invalid code."});
-
-	} catch(error){
-		return res.status(500).json({message:error.message});
+		return res.status(500).json({ message: "Invalid code." });
+	} catch (error) {
+		return res.status(500).json({ message: error.message });
 	}
-}
+};
 
 exports.changePassword = async (req, res) => {
-		const { email, password } = req.body;
-		console.log(req);
-		console.log("email:",email, "pass:", password);
-		const cryptedPassword = await bcrypt.hash(password, 12);
-		await User.findOneAndUpdate(
-			{email},
-			{
-				password: cryptedPassword,
-			}
-		);
-		return res.status(200).json({message: "ok"});
-}
+	const { email, password } = req.body;
+	console.log(req);
+	console.log("email:", email, "pass:", password);
+	const cryptedPassword = await bcrypt.hash(password, 12);
+	await User.findOneAndUpdate(
+		{ email },
+		{
+			password: cryptedPassword,
+		}
+	);
+	return res.status(200).json({ message: "ok" });
+};
+
+exports.getProfile = async (req, res) => {
+	try {
+		const { username } = req.params;
+		const profile = await User.find({ username }).select("-password");
+		res.json(profile);
+	} catch (error) {
+		return res.status(500).json({ message: error.message });
+	}
+};

@@ -10,19 +10,8 @@ import Activate from "./pages/home/activate";
 import Reset from "./pages/reset";
 import CreatePostPopup from "./components/createPostPopup";
 import axios from "axios";
+import { postsReducer } from "./functions/reducer";
 
-function reducer(state, action) {
-	switch (action.type) {
-		case "POSTS_REQUEST":
-			return { ...state, loading: true, error: "" };
-		case "POSTS_SUCCESS":
-			return { ...state, loading: false, posts: action.payload, error: "" };
-		case "POSTS_ERROR":
-			return { ...state, loading: false, error: action.payload };
-		default:
-			return state;
-	}
-}
 function App() {
 	const [visible, setVisible] = useState(false);
 	const { user } = useSelector((state) => ({ ...state }));
@@ -36,7 +25,7 @@ function App() {
 	//   }
 	// }
 	// get();
-	const [{ loading, erorr, posts }, dispatch] = useReducer(reducer, {
+	const [{ loading, erorr, posts }, dispatch] = useReducer(postsReducer, {
 		loading: false,
 		posts: [],
 		error: "",
@@ -77,6 +66,8 @@ function App() {
 			<Routes>
 				<Route element={<LoggedInRoutes />}>
 					<Route path="/profile" element={<Profile />} exact></Route>
+					<Route path="/profile/:username" element={<Profile />} exact></Route>
+
 					<Route
 						path="/"
 						element={<Home setVisible={setVisible} posts={posts} />}

@@ -1,3 +1,5 @@
+// import Cookies from "js-cookie";
+// state = Cookies.get("user") ? JSON.parse(Cookies.get("user")) : null,
 export function postsReducer(state, action) {
 	switch (action.type) {
 		case "POSTS_REQUEST":

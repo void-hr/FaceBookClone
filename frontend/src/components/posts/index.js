@@ -6,13 +6,16 @@ import ReactsPopup from "./ReactsPopup";
 import { useState } from "react";
 import CreateComment from "./CreateComment";
 import PostMenu from "./PostMenu";
-export default function Posts({ post, user }) {
+export default function Posts({ post, user, profile }) {
 	const [visible, setVisible] = useState(false);
 	const [showMenu, setShowMenu] = useState(false);
 
-	console.log(post.user.picture);
+	// console.log(post.user.picture);
 	return (
-		<div className="post" key={post._id}>
+		<div
+			className="post"
+			key={post._id}
+			style={{ width: `${profile && "100%"}` }}>
 			<div className="post_header">
 				{/* Check video 91 3:30 duration   */}
 				{/* inside database (post )user have type objectID we can further populate to get further details inside user object */}

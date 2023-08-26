@@ -268,3 +268,15 @@ exports.getProfile = async (req, res) => {
 		return res.status(500).json({ message: error.message });
 	}
 };
+
+exports.updateProfilePicture = async (req, res) => {
+	try {
+		const { url } = req.body;
+		await User.findByIdAndUpdate(req.user.id, {
+			picture: url,
+		});
+		res.send(url);
+	} catch (error) {
+		return res.status(500).json({ message: error.message });
+	}
+};

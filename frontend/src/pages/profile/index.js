@@ -61,7 +61,7 @@ export default function Profile({ setVisible }) {
 			});
 		}
 	};
-	console.log(profile);
+	console.log("asas", profile);
 	return (
 		<div className="profile">
 			<Header page="profile" />
@@ -110,7 +110,9 @@ export default function Profile({ setVisible }) {
 								<GridPosts />
 								<div className="posts">
 									{/* his way was profile.posts && pprofile.posts.length && profile.posts.map and so on */}
+									{/*  Sorted the post in decreasing order*/}
 									{profile.posts && profile.posts.length ? (
+										profile.posts.sort(() => -1) &&
 										profile.posts.map((post) => (
 											<Post
 												post={post}

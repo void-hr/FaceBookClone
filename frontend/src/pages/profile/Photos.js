@@ -3,7 +3,7 @@ import { photosReducer } from "../../functions/reducer";
 import axios from "axios";
 
 export default function Photos({ username, token }) {
-	const [{ loading, erorr, photos }, dispatch] = useReducer(photosReducer, {
+	const [{ loading, error, photos }, dispatch] = useReducer(photosReducer, {
 		loading: false,
 		photos: {},
 		error: "",
